@@ -21,9 +21,10 @@ if not st.session_state["authenticated"]:
     if st.button("Se connecter"):
         if pwd == PASSWORD:
             st.session_state["authenticated"] = True
+            st.success("Connexion réussie ✅")
             st.rerun()
         else:
-            st.error("Mot de passe incorrect.")
+            st.error("Mot de passe incorrect 🚫")
     st.stop()
 
 # Bouton de déconnexion
@@ -58,14 +59,8 @@ st.markdown(
 # =========================
 # Header principal
 # =========================
-st.markdown(
-    "<h1 style='text-align: center;'>HR Dashboard</h1>",
-    unsafe_allow_html=True
-)
-st.markdown(
-    "<p style='text-align: center; color: grey;'>Suivi automatisé des effectifs, entrées/sorties et indicateurs RH</p>",
-    unsafe_allow_html=True
-)
+st.markdown("<h1 style='text-align: center;'>HR Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: grey;'>Suivi automatisé des effectifs, entrées/sorties et indicateurs RH</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Charger les données
@@ -86,8 +81,8 @@ tabs = st.tabs([
     "📈 Effectifs par contrat /an + pôle/an",
     "📈 Entrées & Sorties / mois/an",
     "📉 Turnover/pôle/an",
-    "Taux de départ CDI par type",
-    "Ancienneté moyenne des CDI par pôle"
+    "🚪 Taux de départ CDI par type",
+    "⏳ Ancienneté moyenne des CDI par pôle"
 ])
 
 # Onglet Données brutes
@@ -124,5 +119,5 @@ with tabs[4]:
 
 # Onglet KPI7
 with tabs[5]:
-    st.markdown("## Ancienneté moyenne des CDI par pôle")
+    st.markdown("## ⏳ Ancienneté moyenne des CDI par pôle")
     show_kpi7(arrivees)
