@@ -2,14 +2,20 @@
 import streamlit as st
 import gspread
 import pandas as pd
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
+
 
 def get_dataframes():
-    # Connexion via st.secrets (pas de fichier local)
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    # Scopes requis pour Google Sheets + Drive
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive",
+    ]
 
-    creds_dict = dict(st.secrets["gcp"])
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    # Connexion via st.secrets (pas de fichier local)
+    creds = Credentials.from_service_account_info(
+        dict(st.secrets["gcp"]), scopes=scopes
+    )
     client = gspread.authorize(creds)
 
     # Récupérer paramètres depuis secrets
