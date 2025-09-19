@@ -34,7 +34,7 @@ def show_kpi1(arrivees: pd.DataFrame):
 
     kpi1 = pd.DataFrame(records)
 
-    st.write("### Effectif (stock en fin d’année, par type de contrat)")
+    st.write("### Effectif , par type de contrat)")
     st.dataframe(kpi1.pivot_table(index="Année", columns="Type de contrat", values="Effectif", fill_value=0))
 
     fig = px.bar(kpi1, x="Année", y="Effectif", color="Type de contrat", barmode="group")
@@ -70,7 +70,7 @@ def show_kpi1(arrivees: pd.DataFrame):
     )
 
     # ==================================================
-    # 3️⃣ Effectif par pôle (stock) AVEC et SANS stagiaires
+    # 3️⃣ Effectif par pôle AVEC et SANS stagiaires
     # ==================================================
     for include_interns, label in [(True, "Avec stagiaires"), (False, "Sans stagiaires")]:
         df_filtered = df.copy()
@@ -92,7 +92,7 @@ def show_kpi1(arrivees: pd.DataFrame):
 
         kpi1_pole = pd.DataFrame(pole_records)
 
-        st.write(f"### Effectif par pôle (stock en fin d’année) — {label}")
+        st.write(f"### Effectif par pôle (fin d’année) — {label}")
         st.dataframe(
             kpi1_pole.pivot_table(index="Année", columns="Pôle", values="Effectif", fill_value=0)
         )
